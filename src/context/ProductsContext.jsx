@@ -10,7 +10,7 @@ const defaultState = {
 export const ProductsContext = React.createContext(defaultState);
 
 export const fetchProducts = async () => {
-  return await http.get(`/products`);
+  return await http.get(`/product`);
 };
 
 export const fetchProductById = id => http.get(`/products/${id}`);

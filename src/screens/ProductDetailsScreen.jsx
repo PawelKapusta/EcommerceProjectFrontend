@@ -37,7 +37,7 @@ const ProductsDetailsScreen = () => {
           <Grid item xs={6}>
             <Grid container justifyContent="center">
               <img
-                src={`${product.ImageUrl}`}
+                src={`${product.imageUrl}`}
                 alt={product.Name + " photo"}
                 loading="lazy"
                 style={{ width: "600px" }}
@@ -49,10 +49,10 @@ const ProductsDetailsScreen = () => {
               {product.Name}
             </Typography>
             <Typography component="div" fontSize={20} gutterBottom marginBottom={6}>
-              Max quantity: {product.Quantity}
+              Max quantity: {product.allquantity}
             </Typography>
             <Typography marginBottom={10} variant="body1">
-              {product.Description}
+              {product.description}
             </Typography>
             <Button
               variant="contained"

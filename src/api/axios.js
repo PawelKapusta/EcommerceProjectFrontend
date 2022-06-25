@@ -1,7 +1,8 @@
 import axios from "axios";
-
+const BASE_URL =  "http://localhost:8080/api/v1"; // process.env.REACT_APP_BACKEND_UR ||
+console.log("BASE_URL",BASE_URL)
 const http = axios.create({
-  baseURL: "http://localhost:8080/api/v1", // Now it's local url
+  baseURL: BASE_URL, // Now it's local url
   headers: {
     "Content-Type": "application/json",
   },

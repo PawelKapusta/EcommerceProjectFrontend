@@ -10,6 +10,8 @@ const ProductsScreen = () => {
     fetchProducts().then(res => setProducts(res?.data));
   }, []);
 
+  console.log(products)
+
   return (
     <Container>
       <Grid container spacing={2} marginTop={10}>

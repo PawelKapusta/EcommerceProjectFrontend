@@ -8,14 +8,14 @@ const ProductCard = ({ product }) => {
   return (
     <Card sx={{ maxWidth: 355 }} elevation={0} style={{ marginBottom: 20 }}>
       <CardActionArea onClick={() => navigate(`/products/${product.ID}`)}>
-        <CardMedia component="img" height={400} image={product.ImageUrl} alt="blouse" />
+        <CardMedia component="img" height={400} image={product.imageUrl} alt="blouse" />
         <CardContent>
           <Typography variant="subtitle1" component="div">
-            {product.Name}
+            {product.name}
           </Typography>
           <Grid container justifyContent="space-between">
-            <Typography variant="body1">{product.Quantity}</Typography>
-            <Typography variant="button">{product.Price} PLN</Typography>
+            <Typography variant="body1">{product.allquantity}</Typography>
+            <Typography variant="button">{product.price} PLN</Typography>
           </Grid>
         </CardContent>
       </CardActionArea>
