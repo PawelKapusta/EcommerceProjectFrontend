@@ -21,6 +21,8 @@ import Footer from "./components/Footer";
 import { LoginContextProvider } from "./context/LoginContext";
 import GithubLoginScreen from "./screens/GithubLoginScreen";
 import GithubAcceptLoginScreen from "./screens/GithubAcceptLoginScreen";
+import ProtectedRoute from "./shared/ProtectedRoute";
+import ProtectedTemp from "./screens/ProtectedTemp";
 
 const theme = createTheme({
   palette: {
@@ -88,8 +90,17 @@ const App = () => {
                 element={<GithubAcceptLoginScreen />}
               />
               <Route path="/register" element={<RegisterScreen />} />
+              <Route
+               path="/protectedTemp"
+               element={
+                 <ProtectedRoute>
+                   <ProtectedTemp />
+                 </ProtectedRoute>
+               }
+              />
               <Route path="*" element={<ErrorScreen />} />
             </Routes>
+            <Footer />
           </Box>
         </ThemeProvider>
       </AppContextProvider>

@@ -10,7 +10,7 @@ const ProductsScreen = () => {
     fetchProducts().then(res => setProducts(res?.data));
   }, []);
 
-  console.log(products)
+  console.log(products);
 
   return (
     <Container>

@@ -15,7 +15,7 @@ const BasketScreen = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" style={{ height: "82vh"}}>
       <Typography variant="h3" marginTop={10} marginBottom={3}>
         Basket
       </Typography>

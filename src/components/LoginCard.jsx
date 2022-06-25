@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme =>
         margin: "auto",
         backgroundColor: "#ffffff",
       },
+      height: "82vh"
     },
     box: {
       display: "flex",
