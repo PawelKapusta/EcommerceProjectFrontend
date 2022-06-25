@@ -22,7 +22,7 @@ const GoogleAcceptLoginScreen = () => {
   return (
     <div>
       <h1>Successfully loged in with Google account!</h1>
-      Redirecting to main page in 3 ... 2 ... 1{waitBeforeNavigate()}
+      Redirecting to main page in 3 ... 2 ... 1{() => waitBeforeNavigate()}
     </div>
   );
 };
