@@ -81,18 +81,25 @@ const useStyles = makeStyles(theme =>
       marginBottom: "3%",
       marginTop: "1%",
     },
+    errors: {
+      marginLeft: "2%",
+      color: "red",
+      fontSize: "1.1em",
+    },
   }),
 );
 
 const RegisterCard = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [open, setOpen] = useState(false);
   const classes = useStyles();
   const navigate = useNavigate();
+  const [status, setStatus] = useState(1000);
 
-  // useEffect(() => {
-  //   <Navigate to="/login" replace />;
-  // }, [success]);
+  useEffect(() => {
+    if (status === 200){
+      navigate("/login");
+    }
+  }, [status]);
 
   const schema = yup.object().shape({
     name: yup.string().required("Name is a required field"),
@@ -122,14 +129,15 @@ const RegisterCard = () => {
     data.Service = "Application";
     registerToApplication(data)
       .then(res => {
-        console.log(res.data);
+        setStatus(res?.status);
+        console.log(res);
         console.log("Successfully");
       })
       .catch(error => {
+        setStatus(error?.response?.status);
         console.log("Err", error);
       });
     reset();
-    setOpen(true);
   };
 
   const handleClickShowPassword = () => {
@@ -144,14 +152,6 @@ const RegisterCard = () => {
     navigate("/login");
   };
 
-  const handleClose = (event, reason) => {
-    const temporary = event;
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
   return (
     <div className={classes.root}>
       <Box className={classes.box}>
@@ -281,6 +281,9 @@ const RegisterCard = () => {
               }}
               type={showPassword ? "text" : "password"}
             />
+            <span className={classes.errors}>
+              {status === 500 ? "User with this username or email is already exist" : ""}
+            </span>
             <div className={classes.registerBox}>
               <input type="submit" value="Register" className={classes.register} />
             </div>
@@ -288,15 +291,6 @@ const RegisterCard = () => {
             {/* <div className={classes.loader}>*/}
             {/*   <LinearProgress /> <span>Trwa utwarzanie konta...</span>*/}
             {/* </div>*/}
-            {/*) : (*/}
-            {/* ""*/}
-            {/*)}*/}
-            {/*{!loading && error?.status === 409 ? (*/}
-            {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>*/}
-            {/*   <Alert severity="error">*/}
-            {/*     Użytkownik o tym nicku już istnieje w bazie danych. Spróbuj innej nazwy*/}
-            {/*   </Alert>*/}
-            {/* </Snackbar>*/}
             {/*) : (*/}
             {/* ""*/}
             {/*)}*/}

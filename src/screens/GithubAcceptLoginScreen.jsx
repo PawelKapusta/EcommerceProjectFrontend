@@ -1,6 +1,6 @@
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import loginContext from "../context/LoginContext";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const GithubAcceptLoginScreen = () => {
   const { setToken, setEmail } = useContext(loginContext);
@@ -12,16 +12,10 @@ const GithubAcceptLoginScreen = () => {
     setEmail(email);
   });
 
-  const waitBeforeNavigate = () => {
-    setTimeout(function () {
-      navigate("/");
-    }, 3000);
-  };
-
   return (
     <div>
       <h1>Successfully loged in with Github account!</h1>
-      Redirecting to main page in 3 ... 2 ... 1{() => waitBeforeNavigate()}
+      Redirecting to main page in 3 ... 2 ... 1{navigate("/")}
     </div>
   );
 };

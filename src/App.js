@@ -22,8 +22,8 @@ import { LoginContextProvider } from "./context/LoginContext";
 import GithubLoginScreen from "./screens/GithubLoginScreen";
 import GithubAcceptLoginScreen from "./screens/GithubAcceptLoginScreen";
 import ProtectedRoute from "./shared/ProtectedRoute";
-import ProtectedTemp from "./screens/ProtectedTemp";
 import LogoutScreen from "./screens/LogoutScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 
 const theme = createTheme({
   palette: {
@@ -107,6 +107,14 @@ const App = () => {
                     <LogoutScreen />
                   </ProtectedRoute>
                 }
+              />
+              <Route
+               path="/profile"
+               element={
+                 <ProtectedRoute>
+                   <ProfileScreen />
+                 </ProtectedRoute>
+               }
               />
               <Route path="*" element={<ErrorScreen />} />
             </Routes>

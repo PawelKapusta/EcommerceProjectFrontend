@@ -42,7 +42,7 @@ const Footer = () => {
         backgroundColor: theme =>
           theme.palette.mode === "light" ? theme.palette.grey[200] : theme.palette.grey[800],
       }}
-      style={{ marginTop: 25 }}
+      id="footer"
     >
       <Box sx={{ textAlign: "center", alignItems: "center" }}>
         <Copyright />
