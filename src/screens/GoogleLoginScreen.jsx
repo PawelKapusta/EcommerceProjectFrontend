@@ -10,6 +10,7 @@ const GoogleLoginScreen = () => {
       .then(res => res.json())
       .then(
         result => {
+          console.log(result);
           setIsLoading(true);
           setLink(result);
         },

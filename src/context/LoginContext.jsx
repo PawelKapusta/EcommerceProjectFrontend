@@ -1,38 +1,42 @@
 import React, { useState } from "react";
 import http from "../api/axios";
-import auth from "../utils/auth";
 
 const getTokenFromStorage = () => {
-  console.log( localStorage.getItem('token'), "xxxxxxxxxx")
-  return localStorage.getItem('token');
+  return localStorage.getItem("token");
 };
 
 const defaultValue = {
   token: "",
-  setToken: () => {return 'a';},
+  setToken: () => {
+    return "";
+  },
+  email: "",
+  setEmail: () => {
+    return "";
+  },
 };
 
 export const loginToApplication = async (username, password) => {
   return await http.post(`/user/login?username=${username}&password=${password}`);
 };
 
-export const registerToApplication = async () => {
-  return await http.post(`/user/register`);
+export const registerToApplication = async data => {
+  return await http.post(`/user/register`, data);
 };
 
 export const LoginContext = React.createContext(defaultValue);
 
 export const LoginContextProvider = ({ children }) => {
   const [token, setToken] = useState(getTokenFromStorage());
+  const [email, setEmail] = useState("");
   const [userInfo, setUserInfo] = useState({});
   const [loginError, setLoginError] = useState({});
-  console.log("kontekst", token)
+  console.log("kontekst", token);
   const reset = () => {
     setToken(null);
     setUserInfo(null);
     setLoginError(null);
-  }
-
+  };
 
   const providerValue = {
     token,
@@ -41,7 +45,9 @@ export const LoginContextProvider = ({ children }) => {
     setUserInfo,
     loginError,
     setLoginError,
-    reset
+    reset,
+    email,
+    setEmail,
   };
 
   return <LoginContext.Provider value={providerValue}>{children}</LoginContext.Provider>;

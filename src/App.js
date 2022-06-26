@@ -93,20 +93,20 @@ const App = () => {
               <Route path="/register" element={<RegisterScreen />} />
               {/*// <Route exact path="" element={<BasketScreen />} />*/}
               <Route
-               path="/basket"
-               element={
-                 <ProtectedRoute>
-                   <BasketScreen />
-                 </ProtectedRoute>
-               }
+                path="/basket"
+                element={
+                  <ProtectedRoute>
+                    <BasketScreen />
+                  </ProtectedRoute>
+                }
               />
               <Route
-               path="/logout"
-               element={
-                 <ProtectedRoute>
-                   <LogoutScreen />
-                 </ProtectedRoute>
-               }
+                path="/logout"
+                element={
+                  <ProtectedRoute>
+                    <LogoutScreen />
+                  </ProtectedRoute>
+                }
               />
               <Route path="*" element={<ErrorScreen />} />
             </Routes>

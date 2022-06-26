@@ -17,7 +17,6 @@ import Link from "@mui/material/Link";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { LoginContext, loginToApplication } from "../context/LoginContext";
-import auth from "../utils/auth";
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -29,7 +28,7 @@ const useStyles = makeStyles(theme =>
         margin: "auto",
         backgroundColor: "#ffffff",
       },
-      height: "82vh"
+      height: "82vh",
     },
     box: {
       display: "flex",
@@ -99,7 +98,8 @@ const useStyles = makeStyles(theme =>
 const LoginCard = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
-  const { userInfo, setUserInfo, setToken, token, loginError, setLoginError } = useContext(LoginContext);
+  const { userInfo, setUserInfo, setToken, token, loginError, setLoginError, setEmail } =
+    useContext(LoginContext);
   const classes = useStyles();
   const navigate = useNavigate();
   const schema = yup.object().shape({
@@ -133,26 +133,21 @@ const LoginCard = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = data => {
-
-    console.log(data)
-    loginToApplication(data.username, data.password).then((res) => {
-      setToken(res?.data?.token);
-      localStorage.setItem('token', res?.data?.token);
-      setUserInfo(res?.data?.user);
-      console.log(res.data)
-      console.log("Successfully")
-    }).catch(error => {
-      setLoginError(error?.response?.data);
-    });
+    loginToApplication(data.username, data.password)
+      .then(res => {
+        setToken(res?.data?.token);
+        localStorage.setItem("token", res?.data?.token);
+        setUserInfo(res?.data?.user);
+        setEmail(res?.data?.user?.email);
+      })
+      .catch(error => {
+        setLoginError(error?.response?.data);
+      });
 
     handleToggle();
     handleClose();
     reset();
   };
-
-  console.log("user", userInfo)
-  console.log("token", token)
-  console.log("errer", loginError)
 
   const handleRedirectClick = () => {
     navigate("/register");
@@ -217,8 +212,8 @@ const LoginCard = () => {
               type={showPassword ? "text" : "password"}
             />
             <span className={classes.errors}>
-               {loginError && loginError?.code === 404 ? loginError?.message: ""}
-             </span>
+              {loginError && loginError?.code === 404 ? loginError?.message : ""}
+            </span>
             <div className={classes.loginBox}>
               <input type="submit" value="Login" className={classes.login} />
             </div>

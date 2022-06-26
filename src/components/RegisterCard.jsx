@@ -20,6 +20,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import LinearProgress from "@mui/material/LinearProgress";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { loginToApplication, registerToApplication } from "../context/LoginContext";
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -117,6 +118,16 @@ const RegisterCard = () => {
   });
 
   const onSubmit = async data => {
+    console.log("register", data);
+    data.Service = "Application";
+    registerToApplication(data)
+      .then(res => {
+        console.log(res.data);
+        console.log("Successfully");
+      })
+      .catch(error => {
+        console.log("Err", error);
+      });
     reset();
     setOpen(true);
   };

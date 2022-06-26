@@ -1,15 +1,15 @@
-import React, {useContext, useState, useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import LoginContext from "../context/LoginContext";
 
 const ProtectedRoute = ({ redirectPath = "/", children }) => {
-  const {token} = useContext(LoginContext);
-  const [state, setState] = useState(token !== null)
+  const { token } = useContext(LoginContext);
+  const [state, setState] = useState(token !== null);
   useEffect(() => {
     setState(token !== null);
-  }, [token])
+  }, [token]);
 
-  console.log("state",state);
+  console.log("state", state);
   if (!state) {
     return <Navigate to={redirectPath} replace />;
   }
