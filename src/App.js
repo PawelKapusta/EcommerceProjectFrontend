@@ -23,6 +23,7 @@ import GithubLoginScreen from "./screens/GithubLoginScreen";
 import GithubAcceptLoginScreen from "./screens/GithubAcceptLoginScreen";
 import ProtectedRoute from "./shared/ProtectedRoute";
 import ProtectedTemp from "./screens/ProtectedTemp";
+import LogoutScreen from "./screens/LogoutScreen";
 
 const theme = createTheme({
   palette: {
@@ -76,7 +77,7 @@ const App = () => {
               <Route exact path="/" element={<HomeScreen />} />
               <Route exact path="/products" element={<ProductsScreen />} />
               <Route exact path="/products/:id" element={<ProductsDetailsScreen />} />
-              <Route exact path="/basket" element={<BasketScreen />} />
+
               <Route path="/basket/payment" element={<PaymentScreen />} />
               <Route path="/login" element={<LoginScreen />} />
               <Route path="/login/auth/google" element={<GoogleLoginScreen />} />
@@ -90,11 +91,20 @@ const App = () => {
                 element={<GithubAcceptLoginScreen />}
               />
               <Route path="/register" element={<RegisterScreen />} />
+              {/*// <Route exact path="" element={<BasketScreen />} />*/}
               <Route
-               path="/protectedTemp"
+               path="/basket"
                element={
                  <ProtectedRoute>
-                   <ProtectedTemp />
+                   <BasketScreen />
+                 </ProtectedRoute>
+               }
+              />
+              <Route
+               path="/logout"
+               element={
+                 <ProtectedRoute>
+                   <LogoutScreen />
                  </ProtectedRoute>
                }
               />

@@ -72,6 +72,7 @@ const useStyles = makeStyles(theme =>
     loginButton: {
       cursor: "pointer",
       fontSize: "1.1rem",
+      marginTop: 10,
     },
     registerBox: {
       textAlign: "center",

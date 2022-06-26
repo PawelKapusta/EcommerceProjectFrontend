@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { AppBar, Toolbar, Button } from "@mui/material";
 import { NavLink as RouterLink } from "react-router-dom";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import Logo from "../assets/Logo.svg";
+import auth from "../utils/auth"
+import LoginContext from "../context/LoginContext";
 
-const headersData = [
+const headersData = isLoggedIn  => [
   {
     label: "Home",
     href: "/",
@@ -13,21 +15,33 @@ const headersData = [
     label: "Products",
     href: "/products",
   },
-  {
-    label: <ShoppingBasketIcon />,
+ {
+    label: <ShoppingBasketIcon/>,
     href: "/basket",
   },
   {
-    label: "Login",
-    href: "/login",
+    label: isLoggedIn ? "Profile" : "Login",
+    href: isLoggedIn ? "/profile" : "/login",
   },
   {
-    label: "Register",
-    href: "/register",
+    label: isLoggedIn ? "LogOut" : "Register",
+    href:  isLoggedIn ? "/logout" : "/register",
   },
 ];
 
 const Header = () => {
+  const {token} = useContext(LoginContext);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token') != null);
+  useEffect(() => {
+    setIsLoggedIn(token !== null);
+  }, [token])
+
+  // useEffect(() => {
+  //   setIsLoggedIn(localStorage.getItem('token') != null);
+  // })
+
+  console.log(isLoggedIn)
+
   const displayDesktop = () => {
     return (
       <Toolbar
@@ -43,7 +57,7 @@ const Header = () => {
   };
 
   const getMenuButtons = () => {
-    return headersData.map(({ label, href }) => {
+    return headersData(isLoggedIn).map(({ label, href }) => {
       return (
         <Button
           {...{

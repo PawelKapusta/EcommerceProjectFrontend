@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -16,6 +16,8 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Link from "@mui/material/Link";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import { LoginContext, loginToApplication } from "../context/LoginContext";
+import auth from "../utils/auth";
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -82,6 +84,7 @@ const useStyles = makeStyles(theme =>
       marginBottom: "2%",
     },
     toRegister: {
+      marginTop: 10,
       cursor: "pointer",
       fontSize: "1.1rem",
     },
@@ -93,9 +96,10 @@ const useStyles = makeStyles(theme =>
   }),
 );
 
-const LoginCard = ({ userInfo }) => {
+const LoginCard = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
+  const { userInfo, setUserInfo, setToken, token, loginError, setLoginError } = useContext(LoginContext);
   const classes = useStyles();
   const navigate = useNavigate();
   const schema = yup.object().shape({
@@ -129,10 +133,26 @@ const LoginCard = ({ userInfo }) => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = data => {
+
+    console.log(data)
+    loginToApplication(data.username, data.password).then((res) => {
+      setToken(res?.data?.token);
+      localStorage.setItem('token', res?.data?.token);
+      setUserInfo(res?.data?.user);
+      console.log(res.data)
+      console.log("Successfully")
+    }).catch(error => {
+      setLoginError(error?.response?.data);
+    });
+
     handleToggle();
     handleClose();
     reset();
   };
+
+  console.log("user", userInfo)
+  console.log("token", token)
+  console.log("errer", loginError)
 
   const handleRedirectClick = () => {
     navigate("/register");
@@ -196,9 +216,9 @@ const LoginCard = ({ userInfo }) => {
               }}
               type={showPassword ? "text" : "password"}
             />
-            {/*<span className={classes.errors}>*/}
-            {/*   {error && error.status === 403 ? "Niepoprawny login lub hasło!" : ""}*/}
-            {/* </span>*/}
+            <span className={classes.errors}>
+               {loginError && loginError?.code === 404 ? loginError?.message: ""}
+             </span>
             <div className={classes.loginBox}>
               <input type="submit" value="Login" className={classes.login} />
             </div>
