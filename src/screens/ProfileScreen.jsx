@@ -6,9 +6,9 @@ const ProfileScreen = () => {
   const { setToken, setEmail } = useContext(loginContext);
 
   return (
-   <div>
-     <h1>ProfileScreen</h1>
-   </div>
+    <div>
+      <h1>ProfileScreen</h1>
+    </div>
   );
 };
 

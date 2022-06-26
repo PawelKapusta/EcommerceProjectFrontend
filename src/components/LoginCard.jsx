@@ -95,8 +95,8 @@ const useStyles = makeStyles(theme =>
       fontSize: "1.1em",
     },
     links: {
-      marginBottom: 15
-    }
+      marginBottom: 15,
+    },
   }),
 );
 
@@ -228,7 +228,8 @@ const LoginCard = () => {
                 variant="outlined"
                 onClick={handleRedirectGoogleClick}
               >
-                <img src={googleIcon} alt="googleIcon" style={{width: "20px", marginRight: 5}}/> Login by Google account
+                <img src={googleIcon} alt="googleIcon" style={{ width: "20px", marginRight: 5 }} />{" "}
+                Login by Google account
               </Link>
             </div>
             <div className={classes.links}>
@@ -237,7 +238,8 @@ const LoginCard = () => {
                 variant="outlined"
                 onClick={handleRedirectGithubClick}
               >
-                <img src={githubIcon} alt="githubIcon" style={{width: "20px", marginRight: 5}}/>Login by Github account
+                <img src={githubIcon} alt="githubIcon" style={{ width: "20px", marginRight: 5 }} />
+                Login by Github account
               </Link>
             </div>
           </form>

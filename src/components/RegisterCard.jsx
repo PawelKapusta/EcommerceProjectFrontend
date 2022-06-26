@@ -97,7 +97,7 @@ const RegisterCard = () => {
   const [status, setStatus] = useState(1000);
 
   useEffect(() => {
-    if (status === 200){
+    if (status === 200) {
       navigate("/login");
     }
   }, [status]);

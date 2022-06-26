@@ -109,12 +109,12 @@ const App = () => {
                 }
               />
               <Route
-               path="/profile"
-               element={
-                 <ProtectedRoute>
-                   <ProfileScreen />
-                 </ProtectedRoute>
-               }
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <ProfileScreen />
+                  </ProtectedRoute>
+                }
               />
               <Route path="*" element={<ErrorScreen />} />
             </Routes>
