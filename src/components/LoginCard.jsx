@@ -17,6 +17,8 @@ import Link from "@mui/material/Link";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { LoginContext, loginToApplication } from "../context/LoginContext";
+import googleIcon from "../assets/icons/google.png";
+import githubIcon from "../assets/icons/github.png";
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -92,6 +94,9 @@ const useStyles = makeStyles(theme =>
       color: "red",
       fontSize: "1.1em",
     },
+    links: {
+      marginBottom: 15
+    }
   }),
 );
 
@@ -217,22 +222,22 @@ const LoginCard = () => {
             <div className={classes.loginBox}>
               <input type="submit" value="Login" className={classes.login} />
             </div>
-            <div>
+            <div className={classes.links}>
               <Link
                 className={classes.toRegister}
                 variant="outlined"
                 onClick={handleRedirectGoogleClick}
               >
-                Login by Google account
+                <img src={googleIcon} alt="googleIcon" style={{width: "20px", marginRight: 5}}/> Login by Google account
               </Link>
             </div>
-            <div>
+            <div className={classes.links}>
               <Link
                 className={classes.toRegister}
                 variant="outlined"
                 onClick={handleRedirectGithubClick}
               >
-                Login by Github account
+                <img src={githubIcon} alt="githubIcon" style={{width: "20px", marginRight: 5}}/>Login by Github account
               </Link>
             </div>
           </form>

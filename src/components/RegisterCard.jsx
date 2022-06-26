@@ -74,6 +74,7 @@ const useStyles = makeStyles(theme =>
       cursor: "pointer",
       fontSize: "1.1rem",
       marginTop: 10,
+      marginBottom: 15,
     },
     registerBox: {
       textAlign: "center",
