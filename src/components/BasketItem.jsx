@@ -19,7 +19,7 @@ const BasketItem = ({ item }) => {
         marginBottom: 3,
       }}
     >
-      <CardMedia component="img" sx={{ maxWidth: 140, maxHeight: 150 }} image={product.ImageUrl} />
+      <CardMedia component="img" sx={{ maxWidth: 140, maxHeight: 150 }} image={product.imageUrl} />
 
       <Grid container justifyContent="space-between">
         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
@@ -34,9 +34,9 @@ const BasketItem = ({ item }) => {
           </Grid>
 
           <Grid>
-            <Typography>{product.Price * quantity} zł</Typography>
+            <Typography>{product.price * quantity} zł</Typography>
             <Typography variant="caption">
-              {quantity} x {product.Price}
+              {quantity} x {product.price}
             </Typography>
           </Grid>
         </Box>

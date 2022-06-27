@@ -1,8 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import LoginContext from "../context/LoginContext";
 
 const HomeScreen = () => {
   const { token, email } = useContext(LoginContext);
+
+  useEffect(() => {
+    localStorage.setItem("email", email);
+  }, []);
+
   return (
     <div className="App" style={{ marginBottom: 25 }}>
       <h1>Welcome {token !== null ? email : ""} in online shop!</h1>

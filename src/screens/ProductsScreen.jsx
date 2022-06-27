@@ -1,16 +1,22 @@
 import React, { useContext, useEffect } from "react";
 import { Container, Grid } from "@mui/material";
 import ProductCard from "../components/ProductCard";
-import { ProductsContext, fetchProducts } from "../context/ProductsContext";
+import {
+  ProductsContext,
+  fetchProducts,
+  fetchCompanies,
+  fetchCategories,
+} from "../context/ProductsContext";
 
 const ProductsScreen = () => {
-  const { products, setProducts } = useContext(ProductsContext);
+  const { products, setProducts, companies, setCompanies, setCategories, categories } =
+    useContext(ProductsContext);
 
   useEffect(() => {
     fetchProducts().then(res => setProducts(res?.data));
+    fetchCompanies().then(res => setCompanies(res?.data));
+    fetchCategories().then(res => setCategories(res?.data));
   }, []);
-
-  console.log(products);
 
   return (
     <Container>
