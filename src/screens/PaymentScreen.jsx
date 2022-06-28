@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import styles from "../styles/Payment.module.css";
@@ -31,12 +31,14 @@ export default function PaymentScreen() {
   };
 
   return (
-    <div>
+    <div className={styles.mainDiv}>
       {clientSecret && param.orderID && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />
         </Elements>
       )}
+      <br />
+      <span className={styles.message}> Stripe is adding a small amount of payment fee!</span>
     </div>
   );
 }

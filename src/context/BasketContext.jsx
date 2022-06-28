@@ -20,6 +20,7 @@ export const createPayment = amount => http.post("/payment", { amount });
 export const BasketContextProvider = ({ children }) => {
   const [items, setItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const deliveryFee = 2.2;
 
   const addItem = newProduct => {
     if (items.map(({ product }) => product.ID).includes(newProduct.ID)) {
@@ -53,7 +54,8 @@ export const BasketContextProvider = ({ children }) => {
     for (let i = 0; i < items.length; i++) {
       temp += items[i]?.product?.price * items[i].quantity;
     }
-    setTotalPrice(temp);
+
+    setTotalPrice(temp + deliveryFee);
   };
 
   const clearBasket = () => {
@@ -70,6 +72,7 @@ export const BasketContextProvider = ({ children }) => {
         calculateTotalPrice,
         totalPrice,
         clearBasket,
+        deliveryFee,
       }}
     >
       {children}

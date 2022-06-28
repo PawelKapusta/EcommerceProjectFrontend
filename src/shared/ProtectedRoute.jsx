@@ -9,7 +9,6 @@ const ProtectedRoute = ({ redirectPath = "/login", children }) => {
     setState(token !== null);
   }, [token]);
 
-  console.log("state", state);
   if (!state) {
     return <Navigate to={redirectPath} replace />;
   }

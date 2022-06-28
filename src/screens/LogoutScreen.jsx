@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import LoginContext from "../context/LoginContext";
 
 const LogoutScreen = () => {
@@ -8,6 +7,7 @@ const LogoutScreen = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
     localStorage.removeItem("ID");
+    localStorage.removeItem("orderEmail");
     reset();
   }, [token]);
 

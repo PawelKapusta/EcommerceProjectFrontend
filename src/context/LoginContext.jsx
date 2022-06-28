@@ -11,9 +11,6 @@ const defaultValue = {
     return "";
   },
   email: "",
-  setEmail: () => {
-    return "";
-  },
 };
 
 export const loginToApplication = async (username, password) => {
@@ -28,7 +25,7 @@ export const LoginContext = React.createContext(defaultValue);
 
 export const LoginContextProvider = ({ children }) => {
   const [token, setToken] = useState(getTokenFromStorage());
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(localStorage.getItem("email"));
   const [userInfo, setUserInfo] = useState(undefined);
   const [loginError, setLoginError] = useState({});
 

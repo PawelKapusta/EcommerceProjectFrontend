@@ -20,6 +20,11 @@ const PaymentSuccessScreen = () => {
         });
     }
   }, [email, param.orderID, paymentId, status]);
+
+  useEffect(() => {
+    localStorage.removeItem("orderEmail");
+  }, []);
+
   return <div>PaymentSuccessScreen is here</div>;
 };
 

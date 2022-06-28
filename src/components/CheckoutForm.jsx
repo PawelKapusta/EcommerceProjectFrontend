@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import styles from "../styles/Payment.module.css";
 import { useParams } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -68,13 +69,11 @@ export default function CheckoutForm() {
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
-      <PaymentElement id="payment-element" />
+      <PaymentElement id={styles.paymentElement} />
       <button className={styles.button} disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner" /> : "Pay now"}
-        </span>
+        <span id="button-text">{isLoading ? <CircularProgress /> : "Pay now"}</span>
       </button>
-      {message && <div id="payment-message">{message}</div>}
+      {message && <div id={styles.paymentMessage}>{message}</div>}
     </form>
   );
 }
