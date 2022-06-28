@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  PaymentElement,
-  useStripe,
-  useElements
-} from "@stripe/react-stripe-js";
+import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import styles from "../styles/Payment.module.css";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -20,7 +16,7 @@ export default function CheckoutForm() {
     }
 
     const clientSecret = new URLSearchParams(window.location.search).get(
-     "payment_intent_client_secret"
+      "payment_intent_client_secret",
     );
 
     if (!clientSecret) {
@@ -45,7 +41,7 @@ export default function CheckoutForm() {
     });
   }, [stripe]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     if (!stripe || !elements) {
@@ -71,14 +67,14 @@ export default function CheckoutForm() {
   };
 
   return (
-   <form id="payment-form" onSubmit={handleSubmit}>
-     <PaymentElement id="payment-element" />
-     <button className={styles.button} disabled={isLoading || !stripe || !elements} id="submit">
+    <form id="payment-form" onSubmit={handleSubmit}>
+      <PaymentElement id="payment-element" />
+      <button className={styles.button} disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"/> : "Pay now"}
+          {isLoading ? <div className="spinner" id="spinner" /> : "Pay now"}
         </span>
-     </button>
-     {message && <div id="payment-message">{message}</div>}
-   </form>
+      </button>
+      {message && <div id="payment-message">{message}</div>}
+    </form>
   );
 }

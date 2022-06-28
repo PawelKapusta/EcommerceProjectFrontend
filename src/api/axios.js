@@ -19,21 +19,21 @@ export const http = axios.create({
   ],
 });
 
-export const httpProtected = (token) => axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-    'Authorization': `Bearer ${token}`,
-  },
-  transformRequest: [
-    data => {
-      return JSON.stringify(data);
+export const httpProtected = token =>
+  axios.create({
+    baseURL: BASE_URL,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-  ],
-  transformResponse: [
-    data => {
-      return JSON.parse(data);
-    },
-  ],
-});
-
+    transformRequest: [
+      data => {
+        return JSON.stringify(data);
+      },
+    ],
+    transformResponse: [
+      data => {
+        return JSON.parse(data);
+      },
+    ],
+  });

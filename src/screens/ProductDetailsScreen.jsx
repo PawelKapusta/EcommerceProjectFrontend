@@ -12,7 +12,7 @@ import { useSnackbar } from "notistack";
 import LinearProgress from "@mui/material/LinearProgress";
 import { createStyles, makeStyles } from "@mui/styles";
 import LoginContext from "../context/LoginContext";
-import IconButton from '@mui/material/IconButton';
+import IconButton from "@mui/material/IconButton";
 
 const useStyles = makeStyles(
   createStyles({
@@ -86,50 +86,54 @@ const ProductsDetailsScreen = () => {
   return (
     <Container>
       {product ? (
-       <div>
-         <IconButton className={classes.backButton}>Back</IconButton>
-        <Grid container spacing={12} justifyContent="space-between" marginTop={3}>
-          <Grid item xs={6}>
-            <Grid container justifyContent="center">
-              <img
-                src={`${product.imageUrl}`}
-                alt={product.name + " photo"}
-                loading="lazy"
-                style={{ width: "600px" }}
-              />
+        <div>
+          <IconButton className={classes.backButton}>Back</IconButton>
+          <Grid container spacing={12} justifyContent="space-between" marginTop={3}>
+            <Grid item xs={6}>
+              <Grid container justifyContent="center">
+                <img
+                  src={`${product.imageUrl}`}
+                  alt={product.name + " photo"}
+                  loading="lazy"
+                  style={{ width: "600px" }}
+                />
+              </Grid>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography component="div" variant="h5" gutterBottom marginBottom={2}>
+                {product.name}
+              </Typography>
+              <Typography component="div" fontSize={20} gutterBottom marginBottom={1}>
+                Description of the product:
+              </Typography>
+              <Typography marginBottom={3} variant="body1">
+                {product.description}
+              </Typography>
+              <Typography marginBottom={3} variant="body1">
+                <b>Price:</b> {product.price} zł
+              </Typography>
+              <Typography marginBottom={3} variant="body1">
+                <b>Company:</b> {company?.name}
+              </Typography>
+              <Typography marginBottom={10} variant="body1">
+                <b>Category:</b> {category?.name}
+              </Typography>
+              {isLoggedIn ? (
+                <Button
+                  variant="contained"
+                  sx={{ background: "linear-gradient(to right, #ff0099, #493240)" }}
+                  fullWidth
+                  disableElevation
+                  onClick={handleAddItem}
+                >
+                  Add to cart
+                </Button>
+              ) : (
+                ""
+              )}
             </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <Typography component="div" variant="h5" gutterBottom marginBottom={2}>
-              {product.name}
-            </Typography>
-            <Typography component="div" fontSize={20} gutterBottom marginBottom={1}>
-              Description of the product:
-            </Typography>
-            <Typography marginBottom={3} variant="body1">
-              {product.description}
-            </Typography>
-            <Typography marginBottom={3} variant="body1">
-              <b>Price:</b> {product.price} zł
-            </Typography>
-            <Typography marginBottom={3} variant="body1">
-              <b>Company:</b> {company?.name}
-            </Typography>
-            <Typography marginBottom={10} variant="body1">
-              <b>Category:</b> {category?.name}
-            </Typography>
-            {isLoggedIn ? <Button
-             variant="contained"
-             sx={{ background: "linear-gradient(to right, #ff0099, #493240)" }}
-             fullWidth
-             disableElevation
-             onClick={handleAddItem}
-            >
-              Add to cart
-            </Button> : ""}
-          </Grid>
-        </Grid>
-       </div>
+        </div>
       ) : (
         <LinearProgress />
       )}

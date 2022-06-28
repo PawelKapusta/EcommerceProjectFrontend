@@ -103,28 +103,28 @@ const App = () => {
                 }
               />
               <Route
-               path="/order"
-               element={
-                 <ProtectedRoute>
-                   <OrderScreen />
-                 </ProtectedRoute>
-               }
+                path="/order"
+                element={
+                  <ProtectedRoute>
+                    <OrderScreen />
+                  </ProtectedRoute>
+                }
               />
               <Route
-               path="/payment/:orderID"
-               element={
-                 <ProtectedRoute>
-                   <PaymentScreen />
-                 </ProtectedRoute>
-               }
+                path="/payment/:orderID"
+                element={
+                  <ProtectedRoute>
+                    <PaymentScreen />
+                  </ProtectedRoute>
+                }
               />
               <Route
-               path="/paymentSuccess/:orderID"
-               element={
-                 <ProtectedRoute>
-                   <PaymentSuccessScreen />
-                 </ProtectedRoute>
-               }
+                path="/paymentSuccess/:orderID"
+                element={
+                  <ProtectedRoute>
+                    <PaymentSuccessScreen />
+                  </ProtectedRoute>
+                }
               />
               <Route
                 path="/logout"

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {http} from "../api/axios";
+import { http } from "../api/axios";
 
 const getTokenFromStorage = () => {
   return localStorage.getItem("token");

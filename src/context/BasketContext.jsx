@@ -15,50 +15,51 @@ export const createOrder = async data => {
   return await httpProtected(localStorage.getItem("token")).post("/order", data);
 };
 
-export const createPayment = (amount) => http.post("/payment", {amount})
-
+export const createPayment = amount => http.post("/payment", { amount });
 
 export const BasketContextProvider = ({ children }) => {
   const [items, setItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const addItem = (newProduct) => {
-    if(items.map(({product}) => product.ID).includes(newProduct.ID)) {
-      setItems(prev => prev
-       .map(({product, quantity}) => {
-         return product.ID === newProduct.ID ?
-          {product, quantity: quantity + 1} : {product, quantity}
-       })
-      )
+  const addItem = newProduct => {
+    if (items.map(({ product }) => product.ID).includes(newProduct.ID)) {
+      setItems(prev =>
+        prev.map(({ product, quantity }) => {
+          return product.ID === newProduct.ID
+            ? { product, quantity: quantity + 1 }
+            : { product, quantity };
+        }),
+      );
     } else {
-      setItems(prev => [...prev, {product: newProduct, quantity: 1}]);
+      setItems(prev => [...prev, { product: newProduct, quantity: 1 }]);
     }
-  }
+  };
 
   const removeItem = (productId, all) => {
-    setItems(prev => prev
-     .map(({product, quantity}) => {
-       if (product.ID === productId) {
-         return all ? {product, quantity: 0} : {product, quantity: quantity - 1}
-       }
-       return {product, quantity}
-     })
-     .filter(({quantity}) => !!quantity)
-    )
-  }
+    setItems(prev =>
+      prev
+        .map(({ product, quantity }) => {
+          if (product.ID === productId) {
+            return all ? { product, quantity: 0 } : { product, quantity: quantity - 1 };
+          }
+          return { product, quantity };
+        })
+        .filter(({ quantity }) => !!quantity),
+    );
+  };
 
   const calculateTotalPrice = () => {
     let temp = 0;
-    for (let i = 0; i <items.length; i++){
-      temp += (items[i]?.product?.price * items[i].quantity);
+    for (let i = 0; i < items.length; i++) {
+      temp += items[i]?.product?.price * items[i].quantity;
     }
     setTotalPrice(temp);
-  }
+  };
 
   const clearBasket = () => {
     setItems([]);
     setTotalPrice(0);
-  }
+  };
 
   return (
     <BasketContext.Provider
@@ -68,7 +69,7 @@ export const BasketContextProvider = ({ children }) => {
         removeItem,
         calculateTotalPrice,
         totalPrice,
-        clearBasket
+        clearBasket,
       }}
     >
       {children}

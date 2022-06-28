@@ -1,7 +1,6 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { http } from "../api/axios";
-import React, { useState } from 'react'
-
+import React, { useState } from "react";
 
 const CARD_OPTIONS = {
   iconStyle: "solid",
@@ -14,66 +13,63 @@ const CARD_OPTIONS = {
       fontSize: "16px",
       fontSmoothing: "antialiased",
       ":-webkit-autofill": { color: "#fce883" },
-      "::placeholder": { color: "#87bbfd" }
+      "::placeholder": { color: "#87bbfd" },
     },
     invalid: {
       iconColor: "#ffc7ee",
-      color: "#ffc7ee"
-    }
-  }
-}
+      color: "#ffc7ee",
+    },
+  },
+};
 
 export default function PaymentForm() {
-  const [success, setSuccess ] = useState(false)
-  const stripe = useStripe()
-  const elements = useElements()
+  const [success, setSuccess] = useState(false);
+  const stripe = useStripe();
+  const elements = useElements();
 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    const {error, paymentMethod} = await stripe.createPaymentMethod({
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
-      card: elements.getElement(CardElement)
-    })
+      card: elements.getElement(CardElement),
+    });
 
-
-    if(!error) {
+    if (!error) {
       try {
-        const {id} = paymentMethod
+        const { id } = paymentMethod;
         const response = await http.post("/payment", {
           amount: 1000,
-          id
-        })
+          id,
+        });
 
-        if(response.data.success) {
-          console.log("Successful payment")
-          setSuccess(true)
+        if (response.data.success) {
+          console.log("Successful payment");
+          setSuccess(true);
         }
-
       } catch (error) {
-        console.log("Error", error)
+        console.log("Error", error);
       }
     } else {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
 
   return (
-   <div className="PaymentDiv">
-     {!success ?
-      <form onSubmit={handleSubmit}>
-        <fieldset className="FormGroup">
-          <div className="FormRow">
-            <CardElement options={CARD_OPTIONS}/>
-          </div>
-        </fieldset>
-        <button className="PayButton">Pay</button>
-      </form>
-      :
-      <div>
-        <h2>You just bought products congrats this is the best decision of you're life</h2>
-      </div>
-     }
-   </div>
-  )
+    <div className="PaymentDiv">
+      {!success ? (
+        <form onSubmit={handleSubmit}>
+          <fieldset className="FormGroup">
+            <div className="FormRow">
+              <CardElement options={CARD_OPTIONS} />
+            </div>
+          </fieldset>
+          <button className="PayButton">Pay</button>
+        </form>
+      ) : (
+        <div>
+          <h2>You just bought products congrats this is the best decision of you're life</h2>
+        </div>
+      )}
+    </div>
+  );
 }

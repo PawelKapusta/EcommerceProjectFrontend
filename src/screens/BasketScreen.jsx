@@ -11,7 +11,7 @@ const BasketScreen = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    calculateTotalPrice()
+    calculateTotalPrice();
   }, [items]);
 
   const handleBuyButton = async () => {
@@ -29,7 +29,7 @@ const BasketScreen = () => {
           No items here!
         </Typography>
       ) : (
-       items?.map((item, index) => (
+        items?.map((item, index) => (
           <Box key={item.product.ID}>
             <BasketItem key={item.product.ID} item={item} />
             {index < items.length - 1 && <Divider />}
