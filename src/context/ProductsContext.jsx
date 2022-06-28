@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import http from "../api/axios";
+import { http } from "../api/axios";
 
 const defaultState = {
   products: [],
   setProducts: () => {},
-  search: () => {
-    return {};
-  },
 };
 
 export const ProductsContext = React.createContext(defaultState);

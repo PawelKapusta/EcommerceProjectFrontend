@@ -24,6 +24,8 @@ import GithubAcceptLoginScreen from "./screens/GithubAcceptLoginScreen";
 import ProtectedRoute from "./shared/ProtectedRoute";
 import LogoutScreen from "./screens/LogoutScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import OrderScreen from "./screens/OrderScreen";
+import PaymentSuccessScreen from "./screens/PaymentSuccessScreen";
 
 const theme = createTheme({
   palette: {
@@ -99,6 +101,30 @@ const App = () => {
                     <BasketScreen />
                   </ProtectedRoute>
                 }
+              />
+              <Route
+               path="/order"
+               element={
+                 <ProtectedRoute>
+                   <OrderScreen />
+                 </ProtectedRoute>
+               }
+              />
+              <Route
+               path="/payment/:orderID"
+               element={
+                 <ProtectedRoute>
+                   <PaymentScreen />
+                 </ProtectedRoute>
+               }
+              />
+              <Route
+               path="/paymentSuccess/:orderID"
+               element={
+                 <ProtectedRoute>
+                   <PaymentSuccessScreen />
+                 </ProtectedRoute>
+               }
               />
               <Route
                 path="/logout"

@@ -11,9 +11,14 @@ import { BasketContext } from "../context/BasketContext";
 import { useSnackbar } from "notistack";
 import LinearProgress from "@mui/material/LinearProgress";
 import { createStyles, makeStyles } from "@mui/styles";
+import LoginContext from "../context/LoginContext";
+import IconButton from '@mui/material/IconButton';
 
 const useStyles = makeStyles(
   createStyles({
+    backButton: {
+      marginTop: 15,
+    },
     errors: {
       marginLeft: "2%",
       color: "red",
@@ -26,6 +31,12 @@ const ProductsDetailsScreen = () => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();
+  const { token } = useContext(LoginContext);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token") != null);
+
+  useEffect(() => {
+    setIsLoggedIn(token !== null);
+  }, [token]);
   const {
     searchProduct,
     searchCompany,
@@ -75,12 +86,14 @@ const ProductsDetailsScreen = () => {
   return (
     <Container>
       {product ? (
+       <div>
+         <IconButton className={classes.backButton}>Back</IconButton>
         <Grid container spacing={12} justifyContent="space-between" marginTop={3}>
           <Grid item xs={6}>
             <Grid container justifyContent="center">
               <img
                 src={`${product.imageUrl}`}
-                alt={product.Name + " photo"}
+                alt={product.name + " photo"}
                 loading="lazy"
                 style={{ width: "600px" }}
               />
@@ -105,17 +118,18 @@ const ProductsDetailsScreen = () => {
             <Typography marginBottom={10} variant="body1">
               <b>Category:</b> {category?.name}
             </Typography>
-            <Button
-              variant="contained"
-              sx={{ background: "linear-gradient(to right, #ff0099, #493240)" }}
-              fullWidth
-              disableElevation
-              onClick={handleAddItem}
+            {isLoggedIn ? <Button
+             variant="contained"
+             sx={{ background: "linear-gradient(to right, #ff0099, #493240)" }}
+             fullWidth
+             disableElevation
+             onClick={handleAddItem}
             >
               Add to cart
-            </Button>
+            </Button> : ""}
           </Grid>
         </Grid>
+       </div>
       ) : (
         <LinearProgress />
       )}

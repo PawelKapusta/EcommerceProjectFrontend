@@ -1,17 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Box, Container, Divider, Typography } from "@mui/material";
-import { BasketContext, createOrder } from "../context/BasketContext";
+import { BasketContext } from "../context/BasketContext";
 import BasketItem from "../components/BasketItem";
 import Button from "@mui/material/Button";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router-dom";
 
 const BasketScreen = () => {
-  const { items } = useContext(BasketContext);
+  const { items, totalPrice, calculateTotalPrice } = useContext(BasketContext);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    calculateTotalPrice()
+  }, [items]);
+
   const handleBuyButton = async () => {
-    await createOrder({ OrderPrice: 1000, PaymentMethod: "Klarna" });
+    navigate("/order");
   };
 
   return (
@@ -25,13 +29,16 @@ const BasketScreen = () => {
           No items here!
         </Typography>
       ) : (
-        items?.map((item, index) => (
+       items?.map((item, index) => (
           <Box key={item.product.ID}>
             <BasketItem key={item.product.ID} item={item} />
             {index < items.length - 1 && <Divider />}
           </Box>
         ))
       )}
+      <Typography variant="h6" marginTop={10} marginBottom={3} color="primary">
+        {totalPrice ? `Total price: ${totalPrice} zł` : ""}
+      </Typography>
       {items.length !== 0 ? (
         <Button
           variant="contained"
@@ -39,7 +46,7 @@ const BasketScreen = () => {
           endIcon={<ArrowForwardIosIcon />}
           onClick={() => handleBuyButton()}
         >
-          Buy items
+          Go to address
         </Button>
       ) : (
         ""

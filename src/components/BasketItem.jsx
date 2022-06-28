@@ -24,12 +24,8 @@ const BasketItem = ({ item }) => {
       <Grid container justifyContent="space-between">
         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <Grid>
-            <Typography component="div" variant="subtitle1">
-              {product.Name}
-            </Typography>
-
             <Typography component="div" variant="h6">
-              {product.Name}
+              {product.name}
             </Typography>
           </Grid>
 

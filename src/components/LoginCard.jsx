@@ -1,10 +1,9 @@
 import React, { useState, useContext } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createStyles, makeStyles } from "@mui/styles";
-import Backdrop from "@mui/material/Backdrop";
 import Paper from "@mui/material/Paper";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormInput from "./FormInput";
@@ -14,7 +13,6 @@ import LockIcon from "@mui/icons-material/Lock";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Link from "@mui/material/Link";
-import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { LoginContext, loginToApplication } from "../context/LoginContext";
 import googleIcon from "../assets/icons/google.png";
@@ -102,8 +100,7 @@ const useStyles = makeStyles(theme =>
 
 const LoginCard = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [open, setOpen] = useState(false);
-  const { userInfo, setUserInfo, setToken, token, loginError, setLoginError, setEmail } =
+  const { setUserInfo, setToken, token, loginError, setLoginError, setEmail } =
     useContext(LoginContext);
   const classes = useStyles();
   const navigate = useNavigate();
@@ -111,14 +108,6 @@ const LoginCard = () => {
     username: yup.string().required("Username is a required field"),
     password: yup.string().required("Password is a required field"),
   });
-
-  const handleToggle = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -142,15 +131,13 @@ const LoginCard = () => {
       .then(res => {
         setToken(res?.data?.token);
         localStorage.setItem("token", res?.data?.token);
+        localStorage.setItem("ID", res?.data?.user?.ID);
         setUserInfo(res?.data?.user);
         setEmail(res?.data?.user?.email);
       })
       .catch(error => {
         setLoginError(error?.response?.data);
       });
-
-    handleToggle();
-    handleClose();
     reset();
   };
 
@@ -248,18 +235,6 @@ const LoginCard = () => {
           You don't have an account? Please register here
         </Link>
       </Box>
-      {/*{loading ? (*/}
-      {/* <Backdrop*/}
-      {/*  className={classes.backdrop}*/}
-      {/*  open={open}*/}
-      {/*  transitionDuration={1500}*/}
-      {/*  invisible={true}*/}
-      {/*  onClick={handleClose}>*/}
-      {/*   <CircularProgress color="secondary" />*/}
-      {/* </Backdrop>*/}
-      {/*) : (*/}
-      {/* ""*/}
-      {/*)}*/}
     </div>
   );
 };

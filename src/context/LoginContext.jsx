@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import http from "../api/axios";
+import {http} from "../api/axios";
 
 const getTokenFromStorage = () => {
   return localStorage.getItem("token");
@@ -29,9 +29,9 @@ export const LoginContext = React.createContext(defaultValue);
 export const LoginContextProvider = ({ children }) => {
   const [token, setToken] = useState(getTokenFromStorage());
   const [email, setEmail] = useState("");
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState(undefined);
   const [loginError, setLoginError] = useState({});
-  console.log("kontekst", token);
+
   const reset = () => {
     setToken(null);
     setUserInfo(null);
