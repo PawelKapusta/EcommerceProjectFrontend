@@ -94,8 +94,7 @@ const OrderScreen = () => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const userID = userInfo ? Number(userInfo.ID) : Number(localStorage.getItem("ID"));
-  const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+  const phoneRegExp = /^\(?(\d{3})\)?[]?(\d{3})[]?(\d{3})$/;
 
   const schema = yup.object().shape({
     street: yup.string().required("Street is a required field"),
