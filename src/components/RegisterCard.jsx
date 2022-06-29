@@ -17,9 +17,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Link from "@mui/material/Link";
 import PersonIcon from "@mui/icons-material/Person";
 import PeopleIcon from "@mui/icons-material/People";
-import LinearProgress from "@mui/material/LinearProgress";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
+import { userSchema as schema } from "../styles/Form";
 import { loginToApplication, registerToApplication } from "../context/LoginContext";
 
 const useStyles = makeStyles(theme =>
@@ -101,18 +99,6 @@ const RegisterCard = () => {
       navigate("/login");
     }
   }, [status]);
-
-  const schema = yup.object().shape({
-    name: yup.string().required("Name is a required field"),
-    surname: yup.string().required("Surname is a required field"),
-    username: yup.string().required("Username is a required field"),
-    email: yup.string().required("Email is a required field"),
-    password: yup.string().required("Password is a required field"),
-    confirmPassword: yup
-      .string()
-      .oneOf([yup.ref("password"), null], "Passwords must be the same")
-      .required("Confirmed password is a required field"),
-  });
 
   const {
     register,

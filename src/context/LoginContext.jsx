@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { http } from "../api/axios";
+import { http, httpProtected } from "../api/axios";
 
 const getTokenFromStorage = () => {
   return localStorage.getItem("token");
@@ -20,6 +20,10 @@ export const loginToApplication = async (username, password) => {
 export const registerToApplication = async data => {
   return await http.post(`/user/register`, data);
 };
+
+export const getUserInfoAboutUser = async (email) => {
+  return await httpProtected(localStorage.getItem("token")).get(`/user/email?email=${email}`)
+}
 
 export const LoginContext = React.createContext(defaultValue);
 
