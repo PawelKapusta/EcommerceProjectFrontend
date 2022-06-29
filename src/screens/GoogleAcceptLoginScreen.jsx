@@ -9,6 +9,7 @@ const GoogleAcceptLoginScreen = () => {
 
   useEffect(() => {
     setToken(token);
+    localStorage.setItem("token", token);
     setEmail(email);
   });
 

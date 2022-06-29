@@ -21,9 +21,9 @@ export const registerToApplication = async data => {
   return await http.post(`/user/register`, data);
 };
 
-export const getUserInfoAboutUser = async (email) => {
-  return await httpProtected(localStorage.getItem("token")).get(`/user/email?email=${email}`)
-}
+export const getUserInfoAboutUser = async email => {
+  return await httpProtected(localStorage.getItem("token")).get(`/user/email?email=${email}`);
+};
 
 export const LoginContext = React.createContext(defaultValue);
 

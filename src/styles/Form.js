@@ -103,7 +103,7 @@ export const userSchema = yup.object().shape({
   email: yup.string().required("Email is a required field"),
   password: yup.string().required("Password is a required field"),
   confirmPassword: yup
-   .string()
-   .oneOf([yup.ref("password"), null], "Passwords must be the same")
-   .required("Confirmed password is a required field"),
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords must be the same")
+    .required("Confirmed password is a required field"),
 });

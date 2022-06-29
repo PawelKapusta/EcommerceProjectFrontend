@@ -1,133 +1,69 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, { useEffect, useState, useContext } from "react";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import StarIcon from "@mui/icons-material/Star";
+import { fetchOrderOfUSer, ProductsContext } from "../context/ProductsContext";
+import { Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import HighlightAltIcon from "@mui/icons-material/HighlightAlt";
 
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import { fetchOrderOfUSer, fetchOrderProductsByOrderId } from "../context/ProductsContext";
-import LoginContext from "../context/LoginContext";
+const ListOrders = () => {
+  const { orders, setOrders } = useContext(ProductsContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    fetchOrderOfUSer(localStorage.getItem("ID")).then(res => setOrders(res?.data));
+  }, []);
 
-const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
-  {
-    id: 'population',
-    label: 'Population',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'density',
-    label: 'Density',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2),
-  },
-];
-
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
-
-const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
-];
-
-
-const ListOrders = ({orders}) => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  console.log("after", orders)
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const onClickItem = id => {
+    navigate(`/order/${id}`);
   };
 
   return (
-   <div>
-     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-       <TableContainer sx={{ maxHeight: 440 }}>
-         <Table stickyHeader aria-label="sticky table">
-           <TableHead>
-             <TableRow>
-               {columns.map((column) => (
-                <TableCell
-                 key={column.id}
-                 align={column.align}
-                 style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-               ))}
-             </TableRow>
-           </TableHead>
-           <TableBody>
-             {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                   {columns.map((column) => {
-                     const value = row[column.id];
-                     return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number'
-                         ? column.format(value)
-                         : value}
-                      </TableCell>
-                     );
-                   })}
-                 </TableRow>
-                );
-              })}
-           </TableBody>
-         </Table>
-       </TableContainer>
-       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+    <div>
+      <Typography
         component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-       />
-     </Paper>
-     {/*<span>{orders[7]}</span>*/}
-   </div>
+        fontSize={20}
+        gutterBottom
+        marginBottom={1}
+        marginTop={3}
+        marginLeft="12%"
+      >
+        {orders.length > 0 ? " Orders:" : "You do not have orders"}
+      </Typography>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <List sx={{ bgcolor: "background.paper", width: "100vh" }} aria-label="contacts">
+          {orders
+            ? orders.map(order => {
+                return (
+                  <ListItem style={{ border: "1px solid black" }}>
+                    <ListItemButton onClick={() => onClickItem(order.ID)}>
+                      <ListItemIcon>
+                        <HighlightAltIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={`Date: ${order.CreatedAt.toString().substring(
+                          0,
+                          10,
+                        )} ${order.CreatedAt.toString().substring(11, 16)} Cost: ${
+                          order.totalprice
+                        } `}
+                        secondary={`isFinished: ${order.isFinished} `}
+                      />
+                      <ListItemText
+                        primary={` Cost: ${order.totalprice} `}
+                        secondary={` isPaid: ${order.isPaid}`}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })
+            : ""}
+        </List>
+      </div>
+    </div>
   );
 };
 

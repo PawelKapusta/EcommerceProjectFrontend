@@ -26,9 +26,11 @@ export const fetchCompanyById = id => http.get(`/company/${id}`);
 
 export const fetchCategoryById = id => http.get(`/category/${id}`);
 
-export const fetchOrderOfUSer = id => httpProtected(localStorage.getItem("token")).get(`/order/user?userId=${id}`);
+export const fetchOrderOfUSer = id =>
+  httpProtected(localStorage.getItem("token")).get(`/order/user?userId=${id}`);
 
-export const fetchOrderProductsByOrderId = id => httpProtected(localStorage.getItem("token")).get(`/orderproduct/${id}`);
+export const fetchOrderProductsByOrderId = id =>
+  httpProtected(localStorage.getItem("token")).get(`/orderproduct/${id}`);
 
 export const ProductsContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
@@ -39,6 +41,7 @@ export const ProductsContextProvider = ({ children }) => {
   const [companyError, setCompanyError] = useState("");
   const [categoryError, setCategoryError] = useState("");
   const [orders, setOrders] = useState([]);
+
   const searchProduct = id => {
     for (let i = 0; i < products.length; i++) {
       if (products[i].ID === Number(id)) {
@@ -50,7 +53,7 @@ export const ProductsContextProvider = ({ children }) => {
   const searchCompany = id => {
     for (let i = 0; i < companies.length; i++) {
       if (companies[i].ID === Number(id)) {
-        console.log(companies[i]);
+        console.log("here");
         return companies[i];
       }
     }
@@ -83,7 +86,7 @@ export const ProductsContextProvider = ({ children }) => {
     categoryError,
     setCategoryError,
     orders,
-    setOrders
+    setOrders,
   };
 
   return <ProductsContext.Provider value={providerValue}>{children}</ProductsContext.Provider>;

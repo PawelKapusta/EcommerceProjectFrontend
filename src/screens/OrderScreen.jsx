@@ -9,12 +9,15 @@ import { LoginContext } from "../context/LoginContext";
 import Paper from "@mui/material/Paper";
 import FormInput from "../components/FormInput";
 import InputAdornment from "@mui/material/InputAdornment";
-import FaceIcon from "@mui/icons-material/Face";
-import PeopleIcon from "@mui/icons-material/People";
+import NumbersIcon from "@mui/icons-material/Numbers";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
 import PersonIcon from "@mui/icons-material/Person";
 import MailIcon from "@mui/icons-material/Mail";
 import { useSnackbar } from "notistack";
 import { useStyles } from "../styles/Form";
+import SignpostIcon from "@mui/icons-material/Signpost";
+import SourceIcon from "@mui/icons-material/Source";
+import PhoneIcon from "@mui/icons-material/Phone";
 
 const OrderScreen = () => {
   const { items, totalPrice, clearBasket } = useContext(BasketContext);
@@ -102,7 +105,7 @@ const OrderScreen = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <FaceIcon className={classes.icon} />
+                    <SignpostIcon className={classes.icon} />
                   </InputAdornment>
                 ),
               }}
@@ -119,7 +122,7 @@ const OrderScreen = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <PeopleIcon className={classes.icon} />
+                    <NumbersIcon className={classes.icon} />
                   </InputAdornment>
                 ),
               }}
@@ -136,7 +139,7 @@ const OrderScreen = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <PersonIcon className={classes.icon} />
+                    <LocationCityIcon className={classes.icon} />
                   </InputAdornment>
                 ),
               }}
@@ -153,7 +156,7 @@ const OrderScreen = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <PersonIcon className={classes.icon} />
+                    <SourceIcon className={classes.icon} />
                   </InputAdornment>
                 ),
               }}
@@ -191,7 +194,7 @@ const OrderScreen = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <PersonIcon className={classes.icon} />
+                    <PhoneIcon className={classes.icon} />
                   </InputAdornment>
                 ),
               }}

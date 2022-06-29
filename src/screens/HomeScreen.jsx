@@ -1,14 +1,15 @@
 import React, { useContext, useEffect } from "react";
-import LoginContext from "../context/LoginContext";
-import { fetchOrderOfUSer, ProductsContext } from "../context/ProductsContext";
+import LoginContext, { getUserInfoAboutUser } from "../context/LoginContext";
 
 const HomeScreen = () => {
-  const { token, email } = useContext(LoginContext);
-  const { setOrders } = useContext(ProductsContext);
+  const { token, email, setUserInfo } = useContext(LoginContext);
 
   useEffect(() => {
     localStorage.setItem("email", email);
-    fetchOrderOfUSer( localStorage.getItem("ID")).then(res => setOrders(res?.data));
+    getUserInfoAboutUser(email).then(res => {
+      setUserInfo(res?.data?.user);
+      localStorage.setItem("ID", res?.data?.user?.ID);
+    });
   }, []);
 
   return (

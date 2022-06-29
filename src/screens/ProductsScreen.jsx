@@ -23,7 +23,7 @@ const ProductsScreen = () => {
       <Grid container spacing={2} marginTop={10}>
         {products?.map(product => (
           <Grid key={product.ID} item lg={3} md={4}>
-            <ProductCard product={product} />
+            <ProductCard product={product} key={product.ID} />
           </Grid>
         ))}
       </Grid>

@@ -3,12 +3,13 @@ import loginContext from "../context/LoginContext";
 import { useNavigate, useParams } from "react-router-dom";
 
 const GithubAcceptLoginScreen = () => {
-  const { setToken, setEmail } = useContext(loginContext);
+  const { setEmail, setToken } = useContext(loginContext);
   const { token, email } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     setToken(token);
+    localStorage.setItem("token", token);
     setEmail(email);
   });
 

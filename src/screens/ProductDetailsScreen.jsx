@@ -12,7 +12,6 @@ import { useSnackbar } from "notistack";
 import LinearProgress from "@mui/material/LinearProgress";
 import { createStyles, makeStyles } from "@mui/styles";
 import LoginContext from "../context/LoginContext";
-import IconButton from "@mui/material/IconButton";
 
 const useStyles = makeStyles(
   createStyles({
@@ -43,9 +42,7 @@ const ProductsDetailsScreen = () => {
     searchCategory,
     productError,
     setProductError,
-    companyError,
     setCompanyError,
-    categoryError,
     setCategoryError,
   } = useContext(ProductsContext);
   const { addItem } = useContext(BasketContext);
@@ -87,7 +84,6 @@ const ProductsDetailsScreen = () => {
     <Container>
       {product ? (
         <div>
-          <IconButton className={classes.backButton}>Back</IconButton>
           <Grid container spacing={12} justifyContent="space-between" marginTop={3}>
             <Grid item xs={6}>
               <Grid container justifyContent="center">
