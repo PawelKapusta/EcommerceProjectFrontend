@@ -80,6 +80,20 @@ const ProductsDetailsScreen = () => {
     }
   };
 
+  const AddToCart = isLoggedIn ? (
+        <Button
+         variant="contained"
+         sx={{ background: "linear-gradient(to right, #ff0099, #493240)" }}
+         fullWidth
+         disableElevation
+         onClick={handleAddItem}
+        >
+          Add to cart
+        </Button>
+       ) : (
+        ""
+       );
+
   return (
     <Container>
       {product ? (
@@ -114,19 +128,7 @@ const ProductsDetailsScreen = () => {
               <Typography marginBottom={10} variant="body1">
                 <b>Category:</b> {category?.name}
               </Typography>
-              {isLoggedIn ? (
-                <Button
-                  variant="contained"
-                  sx={{ background: "linear-gradient(to right, #ff0099, #493240)" }}
-                  fullWidth
-                  disableElevation
-                  onClick={handleAddItem}
-                >
-                  Add to cart
-                </Button>
-              ) : (
-                ""
-              )}
+              {AddToCart}
             </Grid>
           </Grid>
         </div>
