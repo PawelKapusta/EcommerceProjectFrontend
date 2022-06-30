@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { createStyles, makeStyles } from "@mui/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -16,76 +15,9 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Link from "@mui/material/Link";
 import PersonIcon from "@mui/icons-material/Person";
 import PeopleIcon from "@mui/icons-material/People";
-import { userSchema as schema } from "../styles/Form";
+import { registerSchema as schema } from "../styles/Form";
 import { registerToApplication } from "../context/LoginContext";
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    root: {
-      display: "flex",
-      flexWrap: "wrap",
-      "& > *": {
-        marginTop: "7%",
-        margin: "auto",
-        backgroundColor: "#ffffff",
-      },
-    },
-    box: {
-      display: "flex",
-      flexDirection: "column",
-      [theme.breakpoints.up("sm")]: {
-        width: "70%",
-      },
-      [theme.breakpoints.up("md")]: {
-        width: "60%",
-      },
-      [theme.breakpoints.up("lg")]: {
-        width: "40%",
-      },
-      borderColor: "black",
-    },
-    icon: {
-      marginBottom: "50%",
-    },
-    form: {
-      marginTop: "2%",
-      marginLeft: "8%",
-    },
-    loader: {
-      marginTop: "3%",
-      width: "90%",
-    },
-    register: {
-      fontSize: "1.1em",
-      background: "linear-gradient(to right, #ece9e6, #ffffff)",
-      border: 0,
-      borderRadius: 5,
-      boxShadow: "0 3px 5px 2px #A9A9A9",
-      color: "#696969",
-      height: 46,
-      padding: "0 15px",
-      cursor: "pointer",
-      marginTop: 5,
-    },
-    loginButton: {
-      cursor: "pointer",
-      fontSize: "1.1rem",
-      marginTop: 10,
-      marginBottom: 15,
-    },
-    registerBox: {
-      textAlign: "center",
-      marginRight: "5%",
-      marginBottom: "3%",
-      marginTop: "1%",
-    },
-    errors: {
-      marginLeft: "2%",
-      color: "red",
-      fontSize: "1.1em",
-    },
-  }),
-);
+import { useStyles } from "../styles/Form";
 
 const RegisterCard = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -111,17 +43,13 @@ const RegisterCard = () => {
   });
 
   const onSubmit = async data => {
-    console.log("register", data);
     data.Service = "Application";
     registerToApplication(data)
       .then(res => {
         setStatus(res?.status);
-        console.log(res);
-        console.log("Successfully");
       })
       .catch(error => {
         setStatus(error?.response?.status);
-        console.log("Err", error);
       });
     reset();
   };

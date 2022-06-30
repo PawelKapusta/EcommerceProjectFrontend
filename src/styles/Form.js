@@ -80,6 +80,18 @@ export const useStyles = makeStyles(theme =>
       cursor: "pointer",
       marginTop: 5,
     },
+    register: {
+      fontSize: "1.1em",
+      background: "linear-gradient(to right, #ece9e6, #ffffff)",
+      border: 0,
+      borderRadius: 5,
+      boxShadow: "0 3px 5px 2px #A9A9A9",
+      color: "#696969",
+      height: 46,
+      padding: "0 15px",
+      cursor: "pointer",
+      marginTop: 5,
+    },
     loginButton: {
       cursor: "pointer",
       fontSize: "1.1rem",
@@ -93,10 +105,16 @@ export const useStyles = makeStyles(theme =>
       marginBottom: "3%",
       marginTop: "1%",
     },
+    registerBox: {
+      textAlign: "center",
+      marginRight: "5%",
+      marginBottom: "3%",
+      marginTop: "1%",
+    },
   }),
 );
 
-export const userSchema = yup.object().shape({
+export const registerSchema = yup.object().shape({
   name: yup.string().required("Name is a required field"),
   surname: yup.string().required("Surname is a required field"),
   username: yup.string().required("Username is a required field"),
@@ -106,4 +124,11 @@ export const userSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must be the same")
     .required("Confirmed password is a required field"),
+});
+
+export const userSchema = yup.object().shape({
+  name: yup.string().required("Name is a required field"),
+  surname: yup.string().required("Surname is a required field"),
+  username: yup.string().required("Username is a required field"),
+  email: yup.string().required("Email is a required field"),
 });
