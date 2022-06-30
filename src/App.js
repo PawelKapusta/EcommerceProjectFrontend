@@ -28,7 +28,7 @@ import PaymentSuccessScreen from "./screens/PaymentSuccessScreen";
 import OrderDetailsScreen from "./screens/OrderDetailsScreen";
 import Footer from "./components/Footer";
 
-const theme = createTheme({
+let theme = createTheme({
   palette: {
     primary: {
       light: "#fffd61",
@@ -62,8 +62,7 @@ const AppContextProvider = ({ children }) => (
 );
 
 const App = () => {
-  let theme = createTheme();
-  theme = responsiveFontSizes(theme);
+ let theme = createTheme();
 
   return (
     <BrowserRouter>
