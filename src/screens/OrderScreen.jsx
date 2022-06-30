@@ -11,7 +11,6 @@ import FormInput from "../components/FormInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import NumbersIcon from "@mui/icons-material/Numbers";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
-import PersonIcon from "@mui/icons-material/Person";
 import MailIcon from "@mui/icons-material/Mail";
 import { useSnackbar } from "notistack";
 import { useStyles } from "../styles/Form";

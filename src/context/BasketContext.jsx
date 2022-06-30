@@ -48,7 +48,7 @@ export const BasketContextProvider = ({ children }) => {
 
   const calculateTotalPrice = () => {
     let temp = 0;
-    for (let item of items ) {
+    for (let item of items) {
       temp += item?.product?.price * item.quantity;
     }
 

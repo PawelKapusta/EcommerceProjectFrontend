@@ -11,8 +11,9 @@ const PaymentSuccessScreen = () => {
   const email = localStorage.getItem("orderEmail")
     ? localStorage.getItem("orderEmail")
     : localStorage.getItem("email");
-  const [loading, setLoading] = useState(false);
+  let loading = false;
   const navigate = useNavigate();
+
   useEffect(() => {
     if (status === "succeeded") {
       fetch("http://localhost:8080/api/v1/order/" + param.orderID + "/" + email + "/" + paymentId, {
@@ -20,7 +21,7 @@ const PaymentSuccessScreen = () => {
       })
         .then(res => res.json())
         .then(() => {
-          setLoading(true);
+          loading = true;
         });
     }
   }, [email, param.orderID, paymentId, status]);
