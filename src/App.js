@@ -10,7 +10,7 @@ import { ProductsContextProvider } from "./context/ProductsContext";
 import { BasketContextProvider } from "./context/BasketContext";
 import { SnackbarProvider } from "notistack";
 import ProductsScreen from "./screens/ProductsScreen";
-import ProductsDetailsScreen from "./screens/ProductDetailsScreen";
+import ProductsDetailsScreen from "./screens/ProductsDetailsScreen";
 import BasketScreen from "./screens/BasketScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import LoginScreen from "./screens/LoginScreen";

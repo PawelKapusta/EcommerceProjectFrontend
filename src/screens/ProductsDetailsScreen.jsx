@@ -62,10 +62,10 @@ const ProductsDetailsScreen = () => {
           .then(res => {
             setProduct(res?.data);
             fetchCompanyById(Number(res?.data?.companyid))
-              .then(res => setCompany(res?.data))
+              .then(re => setCompany(re?.data))
               .catch(error => setCompanyError(error?.response?.data));
             fetchCategoryById(Number(res?.data?.categoryid))
-              .then(res => setCategory(res?.data))
+              .then(r => setCategory(r?.data))
               .catch(error => setCategoryError(error?.response?.data));
           })
           .catch(error => setProductError(error?.response?.data));
