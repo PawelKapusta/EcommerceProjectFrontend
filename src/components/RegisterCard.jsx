@@ -6,21 +6,16 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormInput from "./FormInput";
-import IconButton from "@mui/material/IconButton";
 import FaceIcon from "@mui/icons-material/Face";
 import MailIcon from "@mui/icons-material/Mail";
-import LockIcon from "@mui/icons-material/Lock";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Link from "@mui/material/Link";
 import PersonIcon from "@mui/icons-material/Person";
 import PeopleIcon from "@mui/icons-material/People";
-import { registerSchema as schema } from "../styles/Form";
+import { registerSchema as schema, useStyles } from "../styles/Form";
 import { registerToApplication } from "../context/LoginContext";
-import { useStyles } from "../styles/Form";
+import PasswordControllers from "./PasswordControllers";
 
 const RegisterCard = () => {
-  const [showPassword, setShowPassword] = useState(false);
   const classes = useStyles();
   const navigate = useNavigate();
   const [status, setStatus] = useState(1000);
@@ -52,14 +47,6 @@ const RegisterCard = () => {
         setStatus(error?.response?.status);
       });
     reset();
-  };
-
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleMouseDownPassword = event => {
-    event.preventDefault();
   };
 
   const handleRedirectClick = () => {
@@ -139,62 +126,7 @@ const RegisterCard = () => {
               }}
               type="email"
             />
-            <FormInput
-              labelTitle="Password"
-              name="password"
-              control={control}
-              register={register}
-              errors={errors?.password}
-              setValue={setValue}
-              numberRows={1}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LockIcon className={classes.icon} />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                    >
-                      {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              type={showPassword ? "text" : "password"}
-            />
-            <FormInput
-              labelTitle="Confirmed password"
-              name="confirmPassword"
-              control={control}
-              register={register}
-              errors={errors?.confirmPassword}
-              setValue={setValue}
-              numberRows={1}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <LockIcon className={classes.icon} />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                    >
-                      {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              type={showPassword ? "text" : "password"}
-            />
+            <PasswordControllers control={control} register={register} errors={errors} setValue={setValue} classes={classes}/>
             <span className={classes.errors}>
               {status === 500 ? "User with this username or email is already exist" : ""}
             </span>
