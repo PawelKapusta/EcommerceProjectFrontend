@@ -1,5 +1,7 @@
 FROM node:18
 
+RUN npm i -g serve
+
 WORKDIR /usr/src/frontend
 
 COPY package*.json ./
@@ -8,4 +10,5 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["npm",  "start"]
+RUN npm run build
+CMD ["serve",  "-s", "build", "-l", "3000"]
