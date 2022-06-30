@@ -37,6 +37,8 @@ const ListOrders = () => {
         <List sx={{ bgcolor: "background.paper", width: "100vh" }} aria-label="contacts">
           {orders
             ? orders.map(order => {
+                const colorPaid = order?.isPaid ? "#00FF00" : "#FF0000";
+                const colorFinished = order?.isFinished ? "#00FF00" : "#FF0000";
                 return (
                   <ListItem style={{ border: "1px solid black" }}>
                     <ListItemButton onClick={() => onClickItem(order.ID)}>
@@ -50,11 +52,21 @@ const ListOrders = () => {
                         )} ${order.CreatedAt.toString().substring(11, 16)} Cost: ${
                           order.totalprice
                         } `}
-                        secondary={`isFinished: ${order.isFinished} `}
+                        secondary={
+                          <Typography
+                            type="body2"
+                            style={{ color: `${colorFinished}` }}
+                          >{`isFinished: ${order.isFinished} `}</Typography>
+                        }
                       />
                       <ListItemText
                         primary={` Cost: ${order.totalprice} `}
-                        secondary={` isPaid: ${order.isPaid}`}
+                        secondary={
+                          <Typography
+                            type="body2"
+                            style={{ color: `${colorPaid}` }}
+                          >{` isPaid: ${order.isPaid}`}</Typography>
+                        }
                       />
                     </ListItemButton>
                   </ListItem>

@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { Box, createTheme, ThemeProvider } from "@mui/material";
 import "./App.css";
 import HomeScreen from "./screens/HomeScreen";
@@ -17,7 +17,6 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import GoogleLoginScreen from "./screens/GoogleLoginScreen";
 import GoogleAcceptLoginScreen from "./screens/GoogleAcceptLoginScreen";
-import Footer from "./components/Footer";
 import { LoginContextProvider } from "./context/LoginContext";
 import GithubLoginScreen from "./screens/GithubLoginScreen";
 import GithubAcceptLoginScreen from "./screens/GithubAcceptLoginScreen";
@@ -27,6 +26,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import OrderScreen from "./screens/OrderScreen";
 import PaymentSuccessScreen from "./screens/PaymentSuccessScreen";
 import OrderDetailsScreen from "./screens/OrderDetailsScreen";
+import Footer from "./components/Footer";
 
 const theme = createTheme({
   palette: {
@@ -64,6 +64,7 @@ const AppContextProvider = ({ children }) => (
 const App = () => {
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
+
   return (
     <BrowserRouter>
       <AppContextProvider>

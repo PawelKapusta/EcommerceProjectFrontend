@@ -18,7 +18,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import ImageIcon from "@mui/icons-material/Image";
 
 const OrderDetailsScreen = () => {
   const param = useParams();
@@ -26,7 +25,6 @@ const OrderDetailsScreen = () => {
   const { orders } = useContext(ProductsContext);
   const order = orders.find(order => order.ID === Number(id));
   const [items, setItems] = useState();
-  console.log("ordesdsadasd", order, param.id);
 
   useEffect(() => {
     fetchOrderProductsByOrderId(id).then(res => {
@@ -34,7 +32,8 @@ const OrderDetailsScreen = () => {
     });
   }, []);
 
-  console.log("items", items);
+  const colorPaid = order?.isPaid ? "#00FF00" : "#FF0000";
+  const colorFinished = order?.isFinished ? "#00FF00" : "#FF0000";
   return (
     <div>
       <Card sx={{ marginBottom: 5 }}>
@@ -72,10 +71,14 @@ const OrderDetailsScreen = () => {
             </Grid>
 
             <Grid item xs={4}>
-              <Typography variant="subtitle1" fontWeight="bold">
+              <Typography variant="subtitle1" fontWeight="bold" style={{ color: `${colorPaid}` }}>
                 Is paid: {order?.isPaid ? "true" : "false"}
               </Typography>
-              <Typography variant="subtitle1" fontWeight="bold">
+              <Typography
+                variant="subtitle1"
+                fontWeight="bold"
+                style={{ color: `${colorFinished}` }}
+              >
                 Is finished: {order?.isFinished ? "true" : "false"}
               </Typography>
               <Typography variant="subtitle1" fontWeight="bold">

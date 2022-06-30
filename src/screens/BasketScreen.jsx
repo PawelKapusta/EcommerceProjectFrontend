@@ -38,7 +38,7 @@ const BasketScreen = () => {
   };
 
   return (
-    <Container maxWidth="sm" style={{ height: "82vh" }}>
+    <Container maxWidth="sm">
       <Typography variant="h3" marginTop={10} marginBottom={3}>
         Basket
       </Typography>
@@ -77,6 +77,7 @@ const BasketScreen = () => {
         <Button
           variant="contained"
           color="primary"
+          style={{ marginBottom: 100 }}
           endIcon={<ArrowForwardIosIcon />}
           onClick={() => handleBuyButton()}
         >
