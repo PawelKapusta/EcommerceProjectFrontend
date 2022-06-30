@@ -3,21 +3,20 @@ import { http, httpProtected } from "../api/axios";
 
 const defaultState = {
   products: [],
-  setProducts: () => {},
 };
 
 export const ProductsContext = React.createContext(defaultState);
 
 export const fetchProducts = async () => {
-  return await http.get(`/product`);
+  return http.get(`/product`);
 };
 
 export const fetchCompanies = async () => {
-  return await http.get(`/company`);
+  return http.get(`/company`);
 };
 
 export const fetchCategories = async () => {
-  return await http.get(`/category`);
+  return http.get(`/category`);
 };
 
 export const fetchProductById = id => http.get(`/product/${id}`);
@@ -43,26 +42,25 @@ export const ProductsContextProvider = ({ children }) => {
   const [orders, setOrders] = useState([]);
 
   const searchProduct = id => {
-    for (let i = 0; i < products.length; i++) {
-      if (products[i].ID === Number(id)) {
-        return products[i];
+    for (let product of products) {
+      if (product.ID === Number(id)) {
+        return product;
       }
     }
   };
 
   const searchCompany = id => {
-    for (let i = 0; i < companies.length; i++) {
-      if (companies[i].ID === Number(id)) {
-        console.log("here");
-        return companies[i];
+    for (let company of companies) {
+      if (company.ID === Number(id)) {
+        return company;
       }
     }
   };
 
   const searchCategory = id => {
-    for (let i = 0; i < categories.length; i++) {
-      if (categories[i].ID === Number(id)) {
-        return categories[i];
+    for (let category of categories) {
+      if (category.ID === Number(id)) {
+        return category;
       }
     }
   };

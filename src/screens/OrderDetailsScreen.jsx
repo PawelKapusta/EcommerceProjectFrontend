@@ -1,16 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { fetchOrderProductsByOrderId, ProductsContext } from "../context/ProductsContext";
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
   Card,
   CardContent,
   Divider,
   Grid,
   Typography,
-  CardProps,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import List from "@mui/material/List";
@@ -23,7 +18,7 @@ const OrderDetailsScreen = () => {
   const param = useParams();
   const id = param.id;
   const { orders } = useContext(ProductsContext);
-  const order = orders.find(order => order.ID === Number(id));
+  const order = orders.find(o => o.ID === Number(id));
   const [items, setItems] = useState();
 
   useEffect(() => {
