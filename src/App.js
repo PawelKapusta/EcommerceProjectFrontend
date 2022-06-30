@@ -28,41 +28,21 @@ import PaymentSuccessScreen from "./screens/PaymentSuccessScreen";
 import OrderDetailsScreen from "./screens/OrderDetailsScreen";
 import Footer from "./components/Footer";
 
-let theme = createTheme({
-  palette: {
-    primary: {
-      light: "#fffd61",
-      main: "#ffca28",
-      dark: "#c79a00",
-      contrastText: "#000",
-    },
-    secondary: {
-      light: "#d7ffd9",
-      main: "#a5d6a7",
-      dark: "#75a478",
-      contrastText: "#000",
-    },
-    text: {
-      primary: "#000",
-      secondary: "#fff",
-    },
-  },
-});
-
-const AppContextProvider = ({ children }) => (
-  <LoginContextProvider>
-    <ProductsContextProvider>
-      <BasketContextProvider>
-        <SnackbarProvider maxSnack={5} variant="success" autoHideDuration={800}>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        </SnackbarProvider>
-      </BasketContextProvider>
-    </ProductsContextProvider>
-  </LoginContextProvider>
-);
-
 const App = () => {
- let theme = createTheme();
+  let theme = createTheme();
+  theme = responsiveFontSizes(theme);
+
+  const AppContextProvider = ({ children }) => (
+    <LoginContextProvider>
+      <ProductsContextProvider>
+        <BasketContextProvider>
+          <SnackbarProvider maxSnack={5} variant="success" autoHideDuration={800}>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </SnackbarProvider>
+        </BasketContextProvider>
+      </ProductsContextProvider>
+    </LoginContextProvider>
+  );
 
   return (
     <BrowserRouter>

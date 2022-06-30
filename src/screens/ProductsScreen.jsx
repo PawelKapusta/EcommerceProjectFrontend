@@ -9,8 +9,7 @@ import {
 } from "../context/ProductsContext";
 
 const ProductsScreen = () => {
-  const { products, setProducts, setCompanies, setCategories } =
-    useContext(ProductsContext);
+  const { products, setProducts, setCompanies, setCategories } = useContext(ProductsContext);
 
   useEffect(() => {
     fetchProducts().then(res => setProducts(res?.data));

@@ -81,18 +81,18 @@ const ProductsDetailsScreen = () => {
   };
 
   const AddToCart = isLoggedIn ? (
-        <Button
-         variant="contained"
-         sx={{ background: "linear-gradient(to right, #ff0099, #493240)" }}
-         fullWidth
-         disableElevation
-         onClick={handleAddItem}
-        >
-          Add to cart
-        </Button>
-       ) : (
-        ""
-       );
+    <Button
+      variant="contained"
+      sx={{ background: "linear-gradient(to right, #ff0099, #493240)" }}
+      fullWidth
+      disableElevation
+      onClick={handleAddItem}
+    >
+      Add to cart
+    </Button>
+  ) : (
+    ""
+  );
 
   const checkError = productError && productError?.message ? productError?.message : "";
 
@@ -138,9 +138,7 @@ const ProductsDetailsScreen = () => {
         <LinearProgress />
       )}
       {productError && productError?.code === 403 ? (
-        <span className={classes.errors}>
-          Error: {checkError}
-        </span>
+        <span className={classes.errors}>Error: {checkError}</span>
       ) : (
         ""
       )}

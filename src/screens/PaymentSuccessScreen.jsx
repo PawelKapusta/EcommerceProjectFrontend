@@ -17,8 +17,7 @@ const PaymentSuccessScreen = () => {
     if (status === "succeeded") {
       fetch("http://localhost:8080/api/v1/order/" + param.orderID + "/" + email + "/" + paymentId, {
         method: "POST",
-      })
-        .then(res => res.json());
+      }).then(res => res.json());
     }
   }, [email, param.orderID, paymentId, status]);
 
@@ -32,29 +31,25 @@ const PaymentSuccessScreen = () => {
 
   return (
     <div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <img src="https://m.media-amazon.com/images/I/41Gb3UOjT5L.jpg" alt="ThankYouImage" />
-          </div>
-          <Typography
-            style={{ display: "flex", justifyContent: "center" }}
-            variant="h6"
-            color="grey"
-          >
-            If you want to see your orders click
-            <Link
-              style={{
-                marginLeft: 8,
-                cursor: "pointer",
-                fontSize: "1.2rem",
-                fontWeight: 600,
-              }}
-              variant="outlined"
-              onClick={handleRedirectToOrders}
-            >
-              {" "}
-              here
-            </Link>
-          </Typography>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <img src="https://m.media-amazon.com/images/I/41Gb3UOjT5L.jpg" alt="ThankYouImage" />
+      </div>
+      <Typography style={{ display: "flex", justifyContent: "center" }} variant="h6" color="grey">
+        If you want to see your orders click
+        <Link
+          style={{
+            marginLeft: 8,
+            cursor: "pointer",
+            fontSize: "1.2rem",
+            fontWeight: 600,
+          }}
+          variant="outlined"
+          onClick={handleRedirectToOrders}
+        >
+          {" "}
+          here
+        </Link>
+      </Typography>
     </div>
   );
 };
