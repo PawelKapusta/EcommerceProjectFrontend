@@ -4,15 +4,12 @@ import { httpProtected } from "../api/axios";
 const defaultValue = {
   totalPrice: 0,
   items: [],
-  addItem: () => {},
-  removeItem: () => {},
-  getQuantity: () => {},
 };
 
 export const BasketContext = React.createContext(defaultValue);
 
 export const createOrder = async data => {
-  return await httpProtected(localStorage.getItem("token")).post("/order", data);
+  return httpProtected(localStorage.getItem("token")).post("/order", data);
 };
 
 export const createPayment = amount => http.post("/payment", { amount });
@@ -51,8 +48,8 @@ export const BasketContextProvider = ({ children }) => {
 
   const calculateTotalPrice = () => {
     let temp = 0;
-    for (let i = 0; i < items.length; i++) {
-      temp += items[i]?.product?.price * items[i].quantity;
+    for (let item of items ) {
+      temp += item?.product?.price * item.quantity;
     }
 
     setTotalPrice(temp + deliveryFee);

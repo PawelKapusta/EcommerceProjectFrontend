@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createStyles, makeStyles } from "@mui/styles";
@@ -18,7 +17,7 @@ import Link from "@mui/material/Link";
 import PersonIcon from "@mui/icons-material/Person";
 import PeopleIcon from "@mui/icons-material/People";
 import { userSchema as schema } from "../styles/Form";
-import { loginToApplication, registerToApplication } from "../context/LoginContext";
+import { registerToApplication } from "../context/LoginContext";
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -274,13 +273,6 @@ const RegisterCard = () => {
             <div className={classes.registerBox}>
               <input type="submit" value="Register" className={classes.register} />
             </div>
-            {/*{loading ? (*/}
-            {/* <div className={classes.loader}>*/}
-            {/*   <LinearProgress /> <span>Trwa utwarzanie konta...</span>*/}
-            {/* </div>*/}
-            {/*) : (*/}
-            {/* ""*/}
-            {/*)}*/}
           </form>
         </Paper>
         <Link className={classes.loginButton} variant="outlined" onClick={handleRedirectClick}>

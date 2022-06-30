@@ -14,15 +14,15 @@ const defaultValue = {
 };
 
 export const loginToApplication = async (username, password) => {
-  return await http.post(`/user/login?username=${username}&password=${password}`);
+  return http.post(`/user/login?username=${username}&password=${password}`);
 };
 
 export const registerToApplication = async data => {
-  return await http.post(`/user/register`, data);
+  return http.post(`/user/register`, data);
 };
 
 export const getUserInfoAboutUser = async email => {
-  return await httpProtected(localStorage.getItem("token")).get(`/user/email?email=${email}`);
+  return httpProtected(localStorage.getItem("token")).get(`/user/email?email=${email}`);
 };
 
 export const LoginContext = React.createContext(defaultValue);
