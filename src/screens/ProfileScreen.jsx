@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getUserInfoAboutUser, LoginContext } from "../context/LoginContext";
-import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box } from "@mui/material";
@@ -45,7 +44,7 @@ const ProfileScreen = () => {
       }
     });
   }, []);
-  console.log("orders", orders);
+
   const {
     register,
     handleSubmit,
@@ -65,7 +64,7 @@ const ProfileScreen = () => {
     event.preventDefault();
   };
 
-  const onSubmit = async data => {
+  const onSubmit = async _data => {
     reset();
   };
 
