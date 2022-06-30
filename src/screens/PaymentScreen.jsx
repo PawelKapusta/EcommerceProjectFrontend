@@ -5,14 +5,14 @@ import styles from "../styles/Payment.module.css";
 import { useParams } from "react-router-dom";
 import CheckoutForm from "../components/CheckoutForm";
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_SECRET);
+const stripePromise = loadStripe("pk_test_51LFLirC3wEnwGyOdlHGhVBe0ohU2J6KmRalLbsYFIvuCwpGCOdvZjvrlLno2xuNGN4HLRNegWS3ozOSbPQaWCO1d00EUUk0JiY");
 
 export default function PaymentScreen() {
   const [clientSecret, setClientSecret] = useState("");
   const param = useParams();
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/payment/" + param.orderID, {
+    fetch("https://ecommerceb.azurewebsites.net/api/v1/payment/" + param.orderID, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ orderID: param.orderID }),

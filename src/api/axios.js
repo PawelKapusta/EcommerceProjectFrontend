@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:8080/api/v1"; // process.env.REACT_APP_BACKEND_UR ||
+const BASE_URL = "https://ecommerceb.azurewebsites.net/api/v1"; // process.env.REACT_APP_BACKEND_UR ||
 console.log("BASE_URL", BASE_URL);
 
 export const http = axios.create({

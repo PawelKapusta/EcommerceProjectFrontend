@@ -6,7 +6,7 @@ const GoogleLoginScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/auth/google")
+    fetch("https://ecommerceb.azurewebsites.net/api/v1/auth/google")
       .then(res => res.json())
       .then(
         result => {

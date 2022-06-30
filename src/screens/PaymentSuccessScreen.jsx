@@ -15,7 +15,7 @@ const PaymentSuccessScreen = () => {
 
   useEffect(() => {
     if (status === "succeeded") {
-      fetch("http://localhost:8080/api/v1/order/" + param.orderID + "/" + email + "/" + paymentId, {
+      fetch("https://ecommerceb.azurewebsites.net/api/v1/order/" + param.orderID + "/" + email + "/" + paymentId, {
         method: "POST",
       }).then(res => res.json());
     }

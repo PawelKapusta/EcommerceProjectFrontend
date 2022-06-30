@@ -6,7 +6,7 @@ const GithubLoginScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/auth/github")
+    fetch("https://ecommerceb.azurewebsites.net/api/v1/auth/github")
       .then(res => res.json())
       .then(
         result => {
