@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import loginContext, { getUserInfoAboutUser, LoginContext } from "../context/LoginContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { getUserInfoAboutUser, LoginContext } from "../context/LoginContext";
 import { useSnackbar } from "notistack";
-import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import FormInput from "../components/FormInput";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -30,10 +28,7 @@ const ProfileScreen = () => {
   const { orders, setOrders } = useContext(ProductsContext);
   const email = userInfo ? userInfo?.email : localStorage.getItem("email");
   const [showPassword, setShowPassword] = useState(false);
-
-  const [status, setStatus] = useState(1000);
   const classes = useStyles();
-  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (userInfo === undefined) {
@@ -42,12 +37,9 @@ const ProfileScreen = () => {
     fetchOrderOfUSer(localStorage.getItem("ID")).then(res => {
       setOrders(res?.data);
       for (let i = 0; i < res?.data?.length; i++) {
-        fetchOrderProductsByOrderId(res?.data[i].ID).then(res => {
+        fetchOrderProductsByOrderId(res?.data[i].ID).then(re => {
           let newArray = [...orders];
-          console.log(newArray);
-          console.log("kur", res?.data);
-
-          newArray[i].items = res?.data;
+          newArray[i].items = re?.data;
           setOrders(newArray);
         });
       }
@@ -211,7 +203,6 @@ const ProfileScreen = () => {
                 }}
                 type={showPassword ? "text" : "password"}
               />
-              <span className={classes.errors}>{status === 500 ? "Error with server" : ""}</span>
               <div className={classes.editBox}>
                 <input type="submit" value="Edit user" className={classes.edit} />
               </div>

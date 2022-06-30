@@ -94,6 +94,8 @@ const ProductsDetailsScreen = () => {
         ""
        );
 
+  const checkError = productError && productError?.message ? productError?.message : "";
+
   return (
     <Container>
       {product ? (
@@ -137,7 +139,7 @@ const ProductsDetailsScreen = () => {
       )}
       {productError && productError?.code === 403 ? (
         <span className={classes.errors}>
-          Error: {productError && productError?.message ? productError?.message : ""}
+          Error: {checkError}
         </span>
       ) : (
         ""

@@ -9,7 +9,7 @@ import {
 } from "../context/ProductsContext";
 
 const ProductsScreen = () => {
-  const { products, setProducts, companies, setCompanies, setCategories, categories } =
+  const { products, setProducts, setCompanies, setCategories } =
     useContext(ProductsContext);
 
   useEffect(() => {
