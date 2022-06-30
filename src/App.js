@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Box, createTheme, ThemeProvider } from "@mui/material";
 import "./App.css";
 import HomeScreen from "./screens/HomeScreen";
