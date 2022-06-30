@@ -46,8 +46,8 @@ export default function PaymentForm() {
           console.log("Successful payment");
           setSuccess(true);
         }
-      } catch (error) {
-        console.log("Error", error);
+      } catch (err) {
+        console.log("Error", err);
       }
     } else {
       console.log(error.message);

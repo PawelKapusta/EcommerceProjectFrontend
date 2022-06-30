@@ -100,8 +100,7 @@ const useStyles = makeStyles(theme =>
 
 const LoginCard = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { setUserInfo, setToken, token, loginError, setLoginError, setEmail } =
-    useContext(LoginContext);
+  const { setUserInfo, setToken, loginError, setLoginError, setEmail } = useContext(LoginContext);
   const classes = useStyles();
   const navigate = useNavigate();
   const schema = yup.object().shape({

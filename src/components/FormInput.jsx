@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import InputLabel from "@mui/material/InputLabel";
 import { Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import { createStyles, makeStyles } from "@mui/styles";

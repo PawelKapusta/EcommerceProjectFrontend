@@ -35,10 +35,6 @@ const Header = () => {
     setIsLoggedIn(token !== null);
   }, [token]);
 
-  // useEffect(() => {
-  //   setIsLoggedIn(localStorage.getItem('token') != null);
-  // })
-
   const displayDesktop = () => {
     return (
       <Toolbar

@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { ProductsContext } from "../context/ProductsContext";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
